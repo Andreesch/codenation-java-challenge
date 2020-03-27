@@ -1,5 +1,7 @@
 package com.codenation.challenge.caesarcrypto.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +11,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.codenation.challenge.caesarcrypto.enums.ChallengeDataTypeEnum;
+
 @Entity
 @Table(name = "CHALLENGE_DATA")
-public class RequestChallengeData {
+public class ChallengeData {
 
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -34,11 +38,17 @@ public class RequestChallengeData {
     @Column(name = "RESUMO_CRIPTOGRAFICO")
     private String resumo_criptografico;
 
+    @Column(name = "INSERT_DATE", nullable = false)
+    private LocalDateTime lastUpdate;
+
+    @Column(name = "DATA_TYPE", nullable = false)
+    private ChallengeDataTypeEnum challengeDataType;
+
     public String getId() {
         return id;
     }
 
-    public RequestChallengeData setId(String id) {
+    public ChallengeData setId(String id) {
         this.id = id;
         return this;
     }
@@ -47,7 +57,7 @@ public class RequestChallengeData {
         return numero_casas;
     }
 
-    public RequestChallengeData setNumero_casas(Integer numero_casas) {
+    public ChallengeData setNumero_casas(Integer numero_casas) {
         this.numero_casas = numero_casas;
         return this;
     }
@@ -56,7 +66,7 @@ public class RequestChallengeData {
         return token;
     }
 
-    public RequestChallengeData setToken(String token) {
+    public ChallengeData setToken(String token) {
         this.token = token;
         return this;
     }
@@ -65,7 +75,7 @@ public class RequestChallengeData {
         return cifrado;
     }
 
-    public RequestChallengeData setCifrado(String cifrado) {
+    public ChallengeData setCifrado(String cifrado) {
         this.cifrado = cifrado;
         return this;
     }
@@ -74,7 +84,7 @@ public class RequestChallengeData {
         return decifrado;
     }
 
-    public RequestChallengeData setDecifrado(String decifrado) {
+    public ChallengeData setDecifrado(String decifrado) {
         this.decifrado = decifrado;
         return this;
     }
@@ -83,8 +93,26 @@ public class RequestChallengeData {
         return resumo_criptografico;
     }
 
-    public RequestChallengeData setResumo_criptografico(String resumo_criptografico) {
+    public ChallengeData setResumo_criptografico(String resumo_criptografico) {
         this.resumo_criptografico = resumo_criptografico;
+        return this;
+    }
+
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public ChallengeData setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+        return this;
+    }
+
+    public ChallengeDataTypeEnum getChallengeDataType() {
+        return challengeDataType;
+    }
+
+    public ChallengeData setChallengeDataType(ChallengeDataTypeEnum challengeDataType) {
+        this.challengeDataType = challengeDataType;
         return this;
     }
 }

@@ -2,9 +2,7 @@ package com.codenation.challenge.caesarcrypto.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -34,7 +32,7 @@ public class RequestController {
     })
     public void getChallengeData(
             @ApiParam(value = "${v1.challenge.generate.data.token}", required = true) @RequestParam String token) {
-        requestService.storeRequestChallengeData(token);
+        requestService.storeChallengeData(token);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -43,8 +41,18 @@ public class RequestController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Sucesso")
     })
-    public void buildChallengeData(
-            @ApiParam(value = "${v1.challenge.generate.data.token}", required = true) @RequestParam String token) {
-        requestService.storeRequestChallengeData(token);
+    public void buildChallengeData() {
+        requestService.buildChallengeData();
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping(value = "/send-challenge-data")
+    @ApiOperation("${v1.challenge.send.data}")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Sucesso")
+    })
+    public void sendChallengeData(
+            @ApiParam(value = "${v1.challenge.send.data.id}", required = true) @RequestParam String dataId) {
+        requestService.sendDataToCodenation(dataId);
     }
 }
